@@ -1,14 +1,14 @@
 package cn.spark.nlp.newwordfind
 
-import org.apache.spark.{SparkConf, SparkContext}
 import cn.spark.nlp.newwordfind.core.NewWordFindConfig
-
+import org.apache.spark.{SparkConf, SparkContext}
+import cn.spark.nlp.newwordfind._
 /**
   *
-  * @author songyaheng on 2017/11/27
+  * @author songyaheng on 2017/12/9
   * @version 1.0
   */
-object Main {
+object TestNewWordFind {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf()
       .setAppName("new-words-find")
@@ -28,7 +28,7 @@ object Main {
       minCount, minInfoEnergy, minPim, numPartition)
 
     val sc = new SparkContext(conf)
-    
+
     val lines =sc.textFile("/Users/songyaheng/Downloads/西游记.txt")
       .flatMap(pattern.findAllIn(_).toSeq)
       .flatMap(_.split(stopwords))
@@ -39,5 +39,4 @@ object Main {
 
     sc.stop()
   }
-
 }
