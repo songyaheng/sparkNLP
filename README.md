@@ -25,7 +25,7 @@
         val maxLen = 6
         val minCount = 20
         val minInfoEnergy = 2.0
-        val minPim = 300.0
+        val minPim = 20.0
         val numPartition = 6
     
         val newWordFindConfig = NewWordFindConfig(minLen, maxLen,
