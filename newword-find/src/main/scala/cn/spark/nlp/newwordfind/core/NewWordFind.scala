@@ -31,8 +31,10 @@ object NewWordFind {
   }
 
   def rddLineCount(rdd: RDD[_]): Double = {
-    rdd.map(line => line.toString.length)
-      .sum()
+    rdd.flatMap(line => line.toString.split(""))
+        .map(w => (w, 1))
+        .reduceByKey(_ + _)
+        .count().toDouble
   }
 
   def trieRDD(rdd: RDD[_], newWordFindConfig: NewWordFindConfig): RDD[Trie[(Double, Int)]] = {
