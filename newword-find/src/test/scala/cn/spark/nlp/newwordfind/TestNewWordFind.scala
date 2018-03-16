@@ -33,6 +33,7 @@ object TestNewWordFind {
       .flatMap(pattern.findAllIn(_).toSeq)
       .flatMap(_.split(stopwords))
       .newWord(sc, newWordFindConfig)
+      //wepf: w:代表词(_1) e: 代表该词的信息熵（左邻右邻信息熵中最小的）(_2) p: 代表点间互信息(_3) f: 代表词频(_4)
       .map(wepf => (wepf._2 * wepf._3 * wepf._4, wepf._1))
       .sortByKey(false, 1)
       .foreach(println)
